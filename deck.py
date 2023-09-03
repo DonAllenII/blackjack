@@ -30,3 +30,12 @@ class dealer():
     # deal 'hit' card to dealer
     def hit_dealer(self, deck):
         self.dealt_dealer.append(deck.pop(random.randint(0, (len(deck) -1))))
+
+
+class user_hand():
+    def __init__(self):
+        self.hand = []
+
+    #list of cards the dealer has
+    def update_user_hand(self, cards):
+        self.hand += cards
