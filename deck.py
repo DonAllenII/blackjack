@@ -1,3 +1,5 @@
+import random
+
 class card_deck():
     def __init__(self):
         pass
