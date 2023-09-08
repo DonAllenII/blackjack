@@ -2,7 +2,7 @@ import random
 
 class card_deck():
     def __init__(self):
-        pass
+        return
     def create_deck(self):
         self.deck = [("♠️"+str(i), "♣️"+str(i), "♥️"+str(i), "♦️"+ str(i)) for i in range(2, 12) ]
         x = []
@@ -40,4 +40,21 @@ class user_hand():
 
     #list of cards the dealer has
     def update_user_hand(self, cards):
-        self.hand += cards
+        if isinstance(cards, list):
+            self.hand += cards
+        else: 
+            self.hand.append(cards)
+    
+    def value(self):
+
+        value = 0
+        for card in self.hand: #iterate through hand
+            pattern = re.compile('[0-9]+') #compile search group for numbers
+            found = pattern.findall(card) # return all matches of number or multiple numbers
+            #print(found)
+            for f in found:
+                #print(f)
+                f = int(f)
+                value += f
+        self.hand_value = value
+        print(self.hand_value)
