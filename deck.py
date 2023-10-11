@@ -4,9 +4,9 @@ class card_deck():
     def __init__(self):
         return
     def create_deck(self):
-        self.deck = [("♠️"+str(i), "♣️"+str(i), "♥️"+str(i), "♦️"+ str(i)) for i in range(2, 12) ]
+        self.deck = [("♠️"+str(i), "♣️"+str(i), "♥️"+str(i), "♦️"+ str(i)) for i in range(1, 14) ]
         x = []
-        for i in deck.deck:
+        for i in self.deck:
             x += i
         self.deck = x
 
