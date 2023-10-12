@@ -73,3 +73,86 @@ class user_hand():
                 value += f
         self.hand_value = value
         #print(self.hand_value)
+
+
+class Game():
+    def __init__(self):
+        pass
+
+                    
+    def run(self):
+        while True:
+            answer =  str(input("Press N for a new game"))
+            if answer.lower() == "n":
+                
+                deck = card_deck() #create new deck object
+                deck.create_deck() #from deck object run create new deck
+
+                user = user_hand() #create user object
+                
+                Dealer = dealer() #create new dealer object
+                Dealer.deal(deck.deck) #dealer deals cards to user, dealer
+                user.update_user_hand(Dealer.dealt_user) #user attributes dealt cards from dealer
+                
+                clear_output()     
+                
+                while True:
+                    #clear_output()
+                    print("Dealer's hand:\n{dValue}".format(dValue = Dealer.dealt_dealer[0])) #show dealer 1st card
+                    print("\n\nUser's hand:\n{uValue}".format(uValue = user.hand)) #show usr hand
+
+                    #check if usr hand equals 21, if true usr wins
+                    user.value()
+                    if user.hand_value == 21:
+                        print("User has BlackJack!!! You win!!")
+                        break
+                         
+                    action = str(input("Would you like to hit/stay?\nPress H for hit/ Press S to stand"))
+                    if action.lower() == "h":
+                        Dealer.hit(deck.deck)  #dealer deals from the deck
+                        user.update_user_hand(Dealer.dealt_user)  #usr hand updates to reflect dealt card
+                        user.value() #calculate usr hand value
+                        clear_output()
+                        print("Dealer's hand:\n{dValue}".format(dValue = Dealer.dealt_dealer[0]))
+                        print("\n\nUser's hand:\n{uValue}".format(uValue = user.hand))
+                        
+                        if user.hand_value == 21:
+                            print("User has 21!!! You win!!")
+                            break
+                        if user.hand_value > 21:
+                            print("User Busts!!!!\n Sorry you lose!")
+                            break
+            
+
+                    if action.lower() == "s":
+                        clear_output()
+                        print("Dealer's hand:")
+                        print(Dealer.dealt_dealer)
+            
+                        while True:
+                            clear_output()
+                            print("Dealer's hand:")
+                            print(Dealer.dealt_dealer)
+                            print("\n")
+                            print("\n\nUser's hand:\n{uValue}".format(uValue = user.hand))
+                            Dealer.value()
+                            user.value()
+                            #print(f'dealer value is {Dealer.hand_value}')
+                            if Dealer.hand_value > 21:
+                                print("Dealer busts!!!!\n You win!!!")
+                                break
+                            if Dealer.hand_value <= 21 & Dealer.hand_value > user.hand_value:
+                                print("Dealer has {dValue}.\nUser has {uValue}. You lose!!".format(dValue = Dealer.hand_value, uValue = user.hand_value))
+                                break
+                            if Dealer.hand_value == 21 and user.hand_value == 21:
+                                print("push!!")
+                            Dealer.hit_dealer(deck.deck)
+                        break
+                        
+            #if answer.lower() == "rules":
+
+            #if answer.lower() == "help":
+
+game = Game()
+
+game.run()
