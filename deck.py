@@ -72,4 +72,4 @@ class user_hand():
                 f = int(f)
                 value += f
         self.hand_value = value
-        print(self.hand_value)
+        #print(self.hand_value)
