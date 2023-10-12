@@ -25,13 +25,28 @@ class dealer():
 
     # deal 'hit' card to user
     def hit(self, deck):
-        self.dealt_user.append(deck.pop(random.randint(0, (len(deck) -1))))
+        
+        self.dealt_user = deck.pop(random.randint(0, (len(deck) -1)))
 
     
 
     # deal 'hit' card to dealer
     def hit_dealer(self, deck):
-        self.dealt_dealer.append(deck.pop(random.randint(0, (len(deck) -1))))
+        #print(len(deck))
+        hit_card = deck.pop(random.randint(0, (len(deck) -1)))
+        self.dealt_dealer.append(hit_card)
+
+    def value(self):
+        value = 0
+        for card in self.dealt_dealer: #iterate through hand
+            pattern = re.compile('[0-9]+') #compile search group for numbers
+            found = pattern.findall(card) # return all matches of number or multiple numbers
+            #print(found)
+            for f in found:
+                #print(f)
+                f = int(f)
+                value += f
+        self.hand_value = value
 
 
 class user_hand():
