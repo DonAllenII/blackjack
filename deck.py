@@ -1,4 +1,7 @@
 import random
+from IPython.display import clear_output
+import re
+
 
 class card_deck():
     def __init__(self):
@@ -82,7 +85,10 @@ class Game():
                     
     def run(self):
         while True:
-            answer =  str(input("Press N for a new game"))
+            answer =  str(input("Press 'N' for a new game\nPress 'Q' to quit\n"))
+            if answer.lower() == "q":
+                break
+
             if answer.lower() == "n":
                 
                 deck = card_deck() #create new deck object
@@ -99,7 +105,7 @@ class Game():
                 while True:
                     #clear_output()
                     print("Dealer's hand:\n{dValue}".format(dValue = Dealer.dealt_dealer[0])) #show dealer 1st card
-                    print("\n\nUser's hand:\n{uValue}".format(uValue = user.hand)) #show usr hand
+                    print("\n\nUser's hand:\n{uValue}\n".format(uValue = user.hand)) #show usr hand
 
                     #check if usr hand equals 21, if true usr wins
                     user.value()
@@ -107,14 +113,14 @@ class Game():
                         print("User has BlackJack!!! You win!!")
                         break
                          
-                    action = str(input("Would you like to hit/stay?\nPress H for hit/ Press S to stand"))
+                    action = str(input("Would you like to hit/stay?\nPress H for hit/ Press S to stand\n"))
                     if action.lower() == "h":
                         Dealer.hit(deck.deck)  #dealer deals from the deck
                         user.update_user_hand(Dealer.dealt_user)  #usr hand updates to reflect dealt card
                         user.value() #calculate usr hand value
                         clear_output()
                         print("Dealer's hand:\n{dValue}".format(dValue = Dealer.dealt_dealer[0]))
-                        print("\n\nUser's hand:\n{uValue}".format(uValue = user.hand))
+                        print("\n\nUser's hand:\n{uValue}\n".format(uValue = user.hand))
                         
                         if user.hand_value == 21:
                             print("User has 21!!! You win!!")
